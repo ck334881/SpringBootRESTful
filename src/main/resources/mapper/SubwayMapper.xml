@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mobin.dao.SubwayMapper">
+    <select id="findSubwayByID" parameterType="int" resultType="subway">
+          SELECT id,name,address,lat,lng,district FROM subways WHERE id=#{id}
+    </select>
+
+    <select id="findSubways" resultType="subway" useCache="false">
+        SELECT id,name,address,lat,lng,district FROM subways
+    </select>
+</mapper>
