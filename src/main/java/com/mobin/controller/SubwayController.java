@@ -15,7 +15,7 @@ import java.util.List;
  * Created by Mobin on 2017/11/14.
  */
 @RestController
-@RequestMapping(value = "/subways")
+@RequestMapping(value = "/api/subways")
 public class SubwayController {
 
     @Autowired
@@ -32,8 +32,8 @@ public class SubwayController {
     }
 
     @RequestMapping(value = "/all",method = RequestMethod.GET)
-    public SubwayResult<List<Subway>> getSubways(@RequestParam(required = false) int pageNum,
-                                                 @RequestParam(required = false)  int pageSize){
+    public SubwayResult<List<Subway>> getSubways(@RequestParam(required = false, defaultValue = "1") int pageNum,
+                                                 @RequestParam(required = false, defaultValue = "3")  int pageSize){
 
         SubwayResult<List<Subway>> subways = new SubwayResult<>();
         List<Subway> sbs = subwayService.findSubways(pageNum, pageSize);
