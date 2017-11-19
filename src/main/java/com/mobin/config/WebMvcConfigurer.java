@@ -19,7 +19,8 @@ public class WebMvcConfigurer extends WebMvcConfigurerAdapter{
         config.setSerializerFeatures(SerializerFeature.WriteNullListAsEmpty,
                 SerializerFeature.WriteMapNullValue,
                 SerializerFeature.WriteNullStringAsEmpty,
-                SerializerFeature.WriteNullBooleanAsFalse);
+                SerializerFeature.WriteNullBooleanAsFalse,
+                SerializerFeature.PrettyFormat);
         converter.setDateFormat("yyyy-MM-dd HH:mm:ss");
         converter.setFastJsonConfig(config);
         converters.add(converter);
