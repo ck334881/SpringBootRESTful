@@ -3,12 +3,18 @@ package com.mobin.controller;
 import com.github.pagehelper.PageInfo;
 import com.mobin.dto.SubwayResult;
 import com.mobin.entity.Subway;
+import com.mobin.exception.EntityNotFoundException;
 import com.mobin.service.SubwayService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.web.WebMvcProperties;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.NoHandlerFoundException;
 
+import javax.servlet.ServletRequest;
 import java.util.List;
 
 /**
@@ -22,12 +28,14 @@ public class SubwayController {
     private SubwayService subwayService;
 
     @RequestMapping(value="/{id}",method = RequestMethod.GET )
-    public SubwayResult<Subway> getSubwayByID(@PathVariable Integer id){
+    public SubwayResult<Subway> getSubwayByID(@PathVariable Integer id) {
         SubwayResult<Subway> result = new SubwayResult();
         Subway subway = subwayService.findSubwayByID(id);
-        result.setData(subway);
-        System.out.println(HttpStatus.OK.value());
+        if (subway == null){
+            throw new EntityNotFoundException("资源不存在");
+        }
         result.setStatus(HttpStatus.OK.value());
+        result.setData(subway);
         return result;
     }
 
