@@ -14,8 +14,8 @@ import org.springframework.web.servlet.NoHandlerFoundException;
 public class GlobalExceptionHadlerActice {
     private static final long serialVersionUID = 1L;
 
-    @ExceptionHandler(value = NoHandlerFoundException.class)
-    public ErrorMessage NoHandlerFoundException(HttpServletRequest request, Exception e){
+    @ExceptionHandler(value = EntityNotFoundException.class)
+    public ErrorMessage entityNotFoundException(HttpServletRequest request, Exception e){
         ErrorMessage errorMessage = new ErrorMessage();
         errorMessage.setStatus(HttpStatus.NOT_FOUND.value());
         errorMessage.setMessage(e.getLocalizedMessage());
